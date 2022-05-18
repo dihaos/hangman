@@ -1,5 +1,6 @@
 const wordEl = document.querySelector('.word');
 const wrongLettersEl = document.querySelector('#wrong-letters');
+const playAgainBtn = document.querySelector('#play-button');
 const popup = document.querySelector('.popup-container');
 const notification = document.querySelector('.notification-container');
 const notificationText = document.querySelector('#notification-text');
@@ -89,5 +90,20 @@ window.addEventListener('keydown', e => {
     }
 });
 
+// Сброс игры
+playAgainBtn.addEventListener('click', () => {
+    playable = true;
+
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
+
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+
+    displayWord();
+
+    updateWrongLettersEl();
+
+    popup.style.display = 'none';
+});
 
 displayWord();
