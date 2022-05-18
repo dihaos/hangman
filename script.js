@@ -9,6 +9,7 @@ const finalMessageRevealWord = document.querySelector('#final-message-reveal-wor
 const figureParts = document.querySelectorAll('.figure-part');
 const words = ['ЖИЗНЬ', 'СВОБОДА', 'КОСМОС', 'СМЕРТЬ'];
 const letterTwice = 'Вы уже выбрали эту букву'
+const selectedNotRu = 'Смените раскладку клавиатуры'
 const correctLetters = [];
 const wrongLetters = [];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
@@ -57,6 +58,7 @@ const updateWrongLettersEl = () => {
 }
 
 // Отображение уведомления о повторном выборе буквы 
+// или о неправильной раскладки клавиатуры
 const showNotification = (text = letterTwice) => {
     notificationText.innerText = text
     notification.classList.add('show');
@@ -86,7 +88,9 @@ window.addEventListener('keydown', e => {
                     showNotification();
                 }
             }
-        } 
+        } else if (e.key.length === 1 && /[a-z]+/i.test(e.key)) {
+            showNotification(selectedNotRu)
+        }
     }
 });
 
